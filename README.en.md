@@ -161,6 +161,7 @@ bash reinstall.sh anolis      7|8|23
 - `--ssh-port PORT` Change the SSH port (for log observation during installation and for the new system)
 - `--web-port PORT` Change the Web port (for log observation during installation)
 - `--frpc-toml /path/to/frpc.toml` Add frpc for intranet tunneling
+- `--cfd-token /path/to/cfd_token_file|cfd_token` Add cloudflare tunnel
 - `--hold 2` Prevent reboot after installation completes, allowing SSH login to modify system content; the system is mounted at `/os` (this feature is not supported on Debian/Kali).
 
 > [!TIP]
@@ -218,6 +219,7 @@ bash reinstall.sh dd --img "https://example.com/xxx.xz"
 - `--ssh-port PORT` Change SSH port (for log observation during installation)
 - `--web-port PORT` Change Web port (for log observation during installation)
 - `--frpc-toml /path/to/frpc.toml` Add frpc for intranet tunneling (DD Windows only)
+- `--cfd-token /path/to/cfd_token_file|cfd_token` Add cloudflare tunnel
 - `--hold 2` Prevent reboot after the DD process finishes, allowing SSH login to modify system content. The Windows system will be mounted at `/os`, but Linux systems will **NOT** be automatically mounted.
 
 > [!TIP]
@@ -248,6 +250,7 @@ bash reinstall.sh alpine --hold=1
   - `--ssh-key /path/to/public_key`
   - `--ssh-key C:\path\to\public_key`
 - `--frpc-toml /path/to/frpc.toml` Add frpc for intranet tunneling
+- `--cfd-token /path/to/cfd_token_file|cfd_token` Add cloudflare tunnel
 
 ### Feature 4: Reboot to <img width="16" height="16" src="https://netboot.xyz/img/favicon.ico" /> netboot.xyz
 
@@ -392,6 +395,7 @@ bash reinstall.sh windows \
   - The driver must be downloaded locally first.
   - This parameter can be set multiple times to add different driver.
 - `--frpc-toml /path/to/frpc.toml` Add frpc for intranet tunneling
+- `--cfd-token /path/to/cfd_token_file|cfd_token` Add cloudflare tunnel
 - `--hold 2` Allow SSH connections for modifying the disk content before rebooting into the official Windows installation program, with the disk mounted at `/os`.
 
 #### The following drivers will automatic download and install as needed, without the need for manual addition

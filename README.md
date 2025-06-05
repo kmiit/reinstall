@@ -161,6 +161,7 @@ bash reinstall.sh anolis      7|8|23
 - `--ssh-port PORT` 修改 SSH 端口（安装期间观察日志用，也作用于新系统）
 - `--web-port PORT` 修改 Web 端口（安装期间观察日志用）
 - `--frpc-toml /path/to/frpc.toml` 添加 frpc 内网穿透
+- `--cfd-token /path/to/cfd_token_file|cfd_token` 添加 cloudflare tunnel 穿透 
 - `--hold 2` 安装结束后不重启，此时可以 SSH 登录修改系统内容，系统挂载在 `/os` (此功能不支持 Debian/Kali)
 
 > [!TIP]
@@ -218,6 +219,7 @@ bash reinstall.sh dd --img "https://example.com/xxx.xz"
 - `--ssh-port PORT` 修改 SSH 端口（安装期间观察日志用）
 - `--web-port PORT` 修改 Web 端口（安装期间观察日志用）
 - `--frpc-toml /path/to/frpc.toml` 添加 frpc 内网穿透（仅限 DD Windows）
+- `--cfd-token /path/to/cfd_token_file|cfd_token` 添加 cloudflare tunnel 穿透 
 - `--hold 2` DD 结束后不重启，此时可以 SSH 登录修改系统内容，Windows 系统会挂载在 `/os`，Linux 系统**不会**自动挂载
 
 > [!TIP]
@@ -248,6 +250,7 @@ bash reinstall.sh alpine --hold=1
   - `--ssh-key /path/to/public_key`
   - `--ssh-key C:\path\to\public_key`
 - `--frpc-toml /path/to/frpc.toml` 添加 frpc 内网穿透
+- `--cfd-token /path/to/cfd_token_file|cfd_token` 添加 cloudflare tunnel 穿透
 
 ### 功能 4: 重启到 <img width="16" height="16" src="https://netboot.xyz/img/favicon.ico" /> netboot.xyz
 
@@ -392,6 +395,7 @@ bash reinstall.sh windows \
   - 需先下载驱动到本地
   - 可多次设置该参数以添加不同的驱动
 - `--frpc-toml /path/to/frpc.toml` 添加 frpc 内网穿透
+- `--cfd-token /path/to/cfd_token_file|cfd_token` 添加 cloudflare tunnel 穿透
 - `--hold 2` 在进入 Windows 官方安装程序之前，可以 SSH 登录修改硬盘内容，硬盘挂载在 `/os`
 
 #### 以下驱动会自动按需下载安装，无需手动添加
