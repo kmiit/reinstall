@@ -1,0 +1,12 @@
+[Unit]Add commentMore actions
+Description=cf tunnel
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=!/var/lib/cloudflared-installed
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/env bash /install-cloudflared.sh
+
+[Install]
+WantedBy=multi-user.target

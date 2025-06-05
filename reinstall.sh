@@ -75,6 +75,7 @@ Usage: $reinstall_____ anolis      7|8|23
                        [--ssh-port  PORT]
                        [--web-port  PORT]
                        [--frpc-toml TOML]
+                       [--cfd-token TOKEN]
 
                        For Windows Only:
                        [--allow-ping]
@@ -3197,6 +3198,12 @@ EOF
         curl -LO "$confhome/frpc.service"
     fi
 
+    # 安装cloudflared tunnel
+    if [ -n "$cfd_token" ]; then
+        curl -LO "$confhome/install-cloudflared.sh"
+        curl -LO "$confhome/cloudflared.service"
+    fi
+
     # 可以节省一点内存？
     echo 'export DEBCONF_DROP_TRANSLATIONS=1' |
         insert_into_file lib/debian-installer/menu before 'exec debconf'
@@ -3568,6 +3575,9 @@ This script is outdated, please download reinstall.sh again.
     if [ -n "$frpc_config" ]; then
         cat "$frpc_config" >$initrd_dir/configs/frpc.toml
     fi
+    if [ -n "$cfd_token" ]; then
+        echo "$cfd_token" >$initrd_dir/configs/cfd.txt
+    fi
 
     if is_distro_like_debian $nextos_distro; then
         mod_initrd_debian_kali
@@ -3737,6 +3747,7 @@ for o in ci installer debug minimal allow-ping force-cn help \
     allow-ping: \
     commit: \
     frpc-conf: frpc-config: frpc-toml: \
+    cfd-token: cloudflared-token: \
     force: \
     force-old-windows-setup:; do
     [ -n "$long_opts" ] && long_opts+=,
@@ -3810,6 +3821,19 @@ while true; do
         # 转为绝对路径
         frpc_config=$(readlink -f "$frpc_config")
 
+        shift 2
+        ;;
+
+    --cfd-token)
+        [ -n "$2" ] || error_and_exit "Need value for $1"
+
+        if [ -f "$2" ]; then
+            unix_path=$(get_unix_path "$2")
+            resolved_path=$(readlink -f "$unix_path")
+            cfd_token=$(<"$resolved_path")
+        else
+            cfd_token=$2
+        fi
         shift 2
         ;;
     --force)
