@@ -19,7 +19,7 @@ install_cloudflared_for_arch() {
 if [ -f /etc/os-release ]; then
     source /etc/os-release
     case "$ID" in
-        arch)
+        arch*)
             install_cloudflared_for_arch
             ;;
         debian*|ubuntu*)
